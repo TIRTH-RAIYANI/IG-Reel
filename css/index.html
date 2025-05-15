@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reels Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;400;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- Reel 1 -->
+        <div class="card" data-audio="audio/song1.mp3">
+            <div class="card-thumbnail">
+                <div class="thumbnail-container">
+                    <img src="images/hanuman.jpg" alt="Hanuman Image">
+                    <div class="interaction-panel">
+                        <li>❤ 1M</li>
+                        <li>💬 10K</li>
+                        <li>➤ 30K</li>
+                        <li>⋮</li>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-avatar">
+                    <img src="images/hanuman.jpg" alt="Avatar">
+                </div>
+                <div class="card-details">
+                    <h3>JAY HANUMANJI DADA</h3>
+                    <p>By....</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reel 2 -->
+        <div class="card" data-audio="audio/song2.mp3">
+            <div class="card-thumbnail">
+                <div class="thumbnail-container">
+                    <img src="images/ram.jpg" alt="Ram Image">
+                    <div class="interaction-panel">
+                        <li>❤ 1M</li>
+                        <li>💬 10K</li>
+                        <li>➤ 30K</li>
+                        <li>⋮</li>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-avatar">
+                    <img src="images/ram.jpg" alt="Avatar">
+                </div>
+                <div class="card-details">
+                    <h3>JAY SHREE RAM</h3>
+                    <p>BY.....</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="reel-audio" src="" autoplay loop></audio>
+
+    <script>
+        const audio = document.getElementById('reel-audio');
+        const cards = document.querySelectorAll('.card');
+        const wrapper = document.querySelector('.wrapper');
+        let currentIndex = 0;
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const newAudio = entry.target.getAttribute('data-audio');
+                    if (audio.src !== location.href + newAudio) {
+                        audio.src = newAudio;
+                        audio.play().catch(() => {});
+                    }
+                }
+            });
+        }, { threshold: 0.9 });
+
+        cards.forEach(card => observer.observe(card));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                currentIndex = Math.min(currentIndex + 1, cards.length - 1);
+                cards[currentIndex].scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === 'ArrowUp') {
+                currentIndex = Math.max(currentIndex - 1, 0);
+                cards[currentIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        // Tap image to pause/play audio
+document.querySelectorAll('.thumbnail-container img').forEach(img => {
+  img.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  });
+});
+
+    </script>
+</body>
+</html>
