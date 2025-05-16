@@ -5,18 +5,17 @@
     <title>Reels Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;400;900&display=swap" rel="stylesheet">
 
-
+    <!-- External CSS -->
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
     <div class="wrapper">
-        <!-- Reel 1 -->
+        
         <div class="card" data-audio="audio/song1.mp3">
             <div class="card-thumbnail">
                 <div class="thumbnail-container">
@@ -97,17 +96,7 @@
                 cards[currentIndex].scrollIntoView({ behavior: 'smooth' });
             }
         });
-        // Tap image to pause/play audio
-document.querySelectorAll('.thumbnail-container img').forEach(img => {
-  img.addEventListener('click', () => {
-    if (audio.paused) {
-      audio.play().catch(() => {});
-    } else {
-      audio.pause();
-    }
-  });
-});
-
+        
     </script>
 </body>
 </html>
